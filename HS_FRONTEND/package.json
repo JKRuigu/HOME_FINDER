@@ -1,0 +1,25 @@
+{
+  "name": "housefinder",
+  "version": "1.0.0",
+  "description": "\"HouseFinder website\"",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start":"node server.js"
+  },
+  "author": "JK Ruigu",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "express-session": "^1.16.1",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "sweetalert2": "^8.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
