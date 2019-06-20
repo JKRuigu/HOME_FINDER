@@ -30,7 +30,11 @@
 </head>
 
 <body class="index-page sidebar-collapse">
-  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+  <% if(display){ %>
+    <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+  <% } else{ %>  
+    <nav class="navbar fixed-top navbar-expand-lg" id="sectionsNav">
+  <% } %>
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="/">
@@ -38,13 +42,6 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="material-icons">
-                call
-              </i>Contact Us
-            </a>
-          </li>
           <li class="nav-item">
             <button type="button" 
                 class="btn btn-outline-info" 
@@ -56,6 +53,20 @@
                data-toggle="modal" data-target="#myModal"
                >REGISTER</button>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">
+              <i class="material-icons">
+                information
+              </i>About Us
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">
+              <i class="material-icons">
+                call
+              </i>Contact Us
+            </a>
+          </li>          
         </ul>
       </div>
     </div>

@@ -12,12 +12,32 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 //ROUTES
+//HOMEPAGE
 app.get('/',(req,res)=>{
-	res.render('index')
+	res.render('index', {
+        display: true
+    })
 });
 
+//SELECT PAGE
 app.get('/select',(req,res)=>{
-	res.render('select')
+	res.render('select', {
+        display: false
+    })
+});
+
+//ABOUT US
+app.get('/about',(req,res)=>{
+	res.render('about', {
+        display: false
+    })
+});
+
+//CONTACT US
+app.get('/contact',(req,res)=>{
+	res.render('contact', {
+        display: false
+    })
 });
 
 const PORT = process.env.PORT || 3000

@@ -6,8 +6,13 @@
         <div class="col-md-8 ml-auto mr-auto">
           <div class="brand">
             <h1>HomeFinder</h1>
+	        <% if(display){ %>
+			   <h1>foo</h1>
+		    <% } else{ %>  
+			   <h1>bar</h1>
+			<% } %>
             <h3>Find yourself a home</h3>
-            <button type="button" class="btn btn-info btn-lg">Get Started</button>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Get Started</button>
           </div>
         </div>
       </div>
