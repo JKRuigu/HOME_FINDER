@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+// var passport = require('passport');
+// var LocalStrategy = require('passport-local').Strategy;
 
-//importing Users Constructor
 var User = require('../../models/user');
 
 //GET USERS
@@ -17,7 +16,7 @@ router.get('/fetch',(req,res)=>{
 	});
 });
 
-//Register POST
+//Register
 router.post('/register',function (req,res) {
 	const { name,tel,email,password,password2,isAdmin } = req.body;
 	if (!name || !tel || !email || !password2 || !password || password !== password2 || !isAdmin) {
@@ -56,10 +55,10 @@ router.post('/login',(req,res)=>{
           res.status(404).json({error:true,message:err.message});
         }
         if (!user || user.length != 1) {
-          console.log(user)
+          // console.log(user)
           res.status(404).json({error:true,message:'Invalid username or password'});
         }else{
-          	User.comparePassword(password,user.password,function (err,isMatch) {
+          	User.comparePassword(password,user[0].password,function (err,isMatch) {
 				if (err)  throw err;
 				if (isMatch) {
 					return res.status(200).json({success:true,data:user});
@@ -69,13 +68,28 @@ router.post('/login',(req,res)=>{
 			});
         }
       });
-
 });
- //logout
- router.get('/logout', function (req,res) {
- 	req.logout();
- 	req.flash('success_msg','You are logged out')
- 	res.redirect('/users/login')
- })
+
+// DELETE
+router.delete('/delete/:email',(req,res)=>{
+	const{ email } = req.params;
+	if (!email) {
+		res.status(404).json({error:true,message:"An authorized request"});
+	}
+	User.find({email},(err,user)=>{
+		if (err || user.length !== 1) {
+			return res.status(404).json({error:true,message:"Server error or Invalid input"});
+		}else{
+
+			User.deleteOne({email},(err,message)=>{
+				if (err) {
+					return res.status(404).json({error:true,message:"Server error"});
+				}
+				res.status(201).json({success:true,message});
+			});
+
+		}
+	});
+});
 
 module.exports = router; 
