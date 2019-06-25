@@ -1,7 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const router = express.Router();
 // var passport = require('passport');
 // var LocalStrategy = require('passport-local').Strategy;
+
+// const config = require('../../config/index');
 
 var User = require('../../models/user');
 
@@ -55,13 +58,18 @@ router.post('/login',(req,res)=>{
           res.status(404).json({error:true,message:err.message});
         }
         if (!user || user.length != 1) {
-          // console.log(user)
           res.status(404).json({error:true,message:'Invalid username or password'});
         }else{
           	User.comparePassword(password,user[0].password,function (err,isMatch) {
 				if (err)  throw err;
 				if (isMatch) {
-					return res.status(200).json({success:true,data:user});
+					// CREATE TOKEN WITH JWT
+					const token = jwt.sign({ id: user }, 'iuwbgu9bg98whwiv9wg98wghne908hgoin');
+					
+					const { isAdmin,isDeleted,isActive,email,name,tel,_id,createdAt,updatedAt } = user[0];
+
+					const data = { isAdmin,isDeleted,isActive,email,name,tel,_id,createdAt,updatedAt,token };
+					return res.status(200).json({success:true,user:data});
 				}else{
 					return res.status(404).json({error:true,message:'Invalid username or password'});
 				}
