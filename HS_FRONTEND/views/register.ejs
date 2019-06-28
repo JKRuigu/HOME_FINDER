@@ -1,0 +1,58 @@
+<%- include('./partials/header.ejs', {title: "HomeFinder | Register"}); %>
+<div class="View" style="margin-top: 90px;">
+    <div class="container" style="width: 500px;">
+    	<div class="row">
+    		<div class="card">
+    			<h3 style="text-align: center;">REGISTER</h3>
+                <form style="padding: 10px;">
+                  <div class="input-group">
+                    <div>
+                      <span class="input-group-text">
+                        <i class="material-icons">person</i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Full Names..." maxlength="40">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <div>
+                      <span class="input-group-text">
+                        <i class="material-icons">mail</i>
+                      </span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="Email..." maxlength="20">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <div>
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Password..." maxlength="15">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <div>
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Confirm Password..." maxlength="15">
+                  </div>
+                  <br> 
+                  <div class="input-group">
+                    <div class="row col-md-8 ml-auto mr-auto"><br>
+                      <button class="btn btn-block btn-info ml-auto mr-auto">REGISTER</button>
+                    </div>                    
+                  </div>
+                </form>
+                  <div style="align-items: center;">
+                    <p style="text-align: center;">Already have an account? <a href="/login">Login</a></p>
+                  </div>
+                  <br>
+                </div>
+    	</div>
+    </div>
+</div>
+<%- include('./partials/footer.ejs') %>	

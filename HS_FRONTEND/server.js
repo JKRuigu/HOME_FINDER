@@ -40,6 +40,28 @@ app.get('/contact',(req,res)=>{
     })
 });
 
+
+//LOGIN
+app.get('/login',(req,res)=>{
+    res.render('login', {
+        display: false
+    })
+});
+
+
+//REGISTER
+app.get('/register',(req,res)=>{
+    res.render('register', {
+        display: false
+    })
+});
+
+app.get('/*',(req,res)=>{
+    res.render('index', {
+        display: true
+    })
+});
+
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT,()=>{console.log(`Server running on port ${PORT}`)});

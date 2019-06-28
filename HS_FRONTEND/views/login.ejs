@@ -1,0 +1,41 @@
+<%- include('./partials/header.ejs', {title: "HomeFinder | Login"}); %>
+<div class="View" style="margin-top: 90px">
+    <div class="container" style="width: 500px;">
+    	<div class="row">
+    		<div class="card">
+    			<h3 style="text-align: center;">LOGIN</h3>
+                  <form style="padding: 10px;">
+                    <div class="input-group">
+                      <div>
+                        <span class="input-group-text">
+                          <i class="material-icons">email</i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Email..." maxlength="15">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                      <div>
+                        <span class="input-group-text">
+                          <i class="material-icons">lock_outline</i>
+                        </span>
+                      </div>
+                      <input type="password" class="form-control" placeholder="Password..." maxlength="15">
+                    </div>
+                    <br>                     
+                    <div class="input-group">
+                      <div class="row col-md-8 ml-auto mr-auto">
+                        <button class="btn btn-block btn-info ml-auto mr-auto">LOGIN</button>
+                      </div>                    
+                    </div>
+                  </form>
+	                  <div style="align-items: center;">
+	                  	<p style="text-align: center;"><a href="/forgot">Forgot password ?</a></p>
+	                    <p style="text-align: center;">Don't have an account? <a href="/register">Register</a></p>
+	                  </div>
+	                  <br>
+                </div>
+    	</div>
+    </div>
+</div>
+<%- include('./partials/footer.ejs') %>	
