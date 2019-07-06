@@ -7,6 +7,7 @@ const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const session = require('express-session');
+const cors = require('cors');
 
 const authUser = require('./api/auth/user');
 
@@ -24,6 +25,7 @@ const authUser = require('./api/auth/user');
   
 //init App
 const app = express();
+app.use(cors());
 
 //BodyParser Middleware
 app.use(bodyParser.json());

@@ -47,18 +47,22 @@ router.post('/register',function (req,res) {
 
 // LOGIN
 router.post('/login',(req,res)=>{
-	const { username,password } = req.body;
-	if (!username || !password) {
+	console.log(req.body);
+	console.log('============================================================')
+	const { email,password } = req.body;
+	console.log(email,password);
+	
+	if (!email || !password) {
 		res.status(404).json({error:true,message:"Fill all the feilds"});
 	}
 
 
-      User.find({email:username,isActive:true,isDeleted:false }, (err, user) => {
+      User.find({email,isActive:true,isDeleted:false }, (err, user) => {
         if (err) {
           res.status(404).json({error:true,message:err.message});
         }
         if (!user || user.length != 1) {
-          res.status(404).json({error:true,message:'Invalid username or password'});
+          res.status(404).json({error:true,message:'Invalid email or password'});
         }else{
           	User.comparePassword(password,user[0].password,function (err,isMatch) {
 				if (err)  throw err;
@@ -71,7 +75,7 @@ router.post('/login',(req,res)=>{
 					const data = { isAdmin,isDeleted,isActive,email,name,tel,_id,createdAt,updatedAt,token };
 					return res.status(200).json({success:true,user:data});
 				}else{
-					return res.status(404).json({error:true,message:'Invalid username or password'});
+					return res.status(404).json({error:true,message:'Invalid email or password'});
 				}
 			});
         }

@@ -1,16 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
 app.set('view engine','ejs');
 
+
+app.use(cors());
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
-
 //ROUTES
 //HOMEPAGE
 app.get('/',(req,res)=>{
@@ -40,6 +42,10 @@ app.get('/contact',(req,res)=>{
     })
 });
 
+
+app.post('/users/login',(req,res)=>{
+    console.log(req.body);
+});
 
 //LOGIN
 app.get('/login',(req,res)=>{

@@ -4,38 +4,184 @@
     	<div class="row">
     		<div class="card">
     			<h3 style="text-align: center;">LOGIN</h3>
-                  <form style="padding: 10px;">
-                    <div class="input-group">
-                      <div>
-                        <span class="input-group-text">
-                          <i class="material-icons">email</i>
-                        </span>
-                      </div>
-                      <input type="text" class="form-control" placeholder="Email..." maxlength="15">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                      <div>
-                        <span class="input-group-text">
-                          <i class="material-icons">lock_outline</i>
-                        </span>
-                      </div>
-                      <input type="password" class="form-control" placeholder="Password..." maxlength="15">
-                    </div>
-                    <br>                     
-                    <div class="input-group">
-                      <div class="row col-md-8 ml-auto mr-auto">
-                        <button class="btn btn-block btn-info ml-auto mr-auto">LOGIN</button>
-                      </div>                    
-                    </div>
-                  </form>
-	                  <div style="align-items: center;">
-	                  	<p style="text-align: center;"><a href="/forgot">Forgot password ?</a></p>
-	                    <p style="text-align: center;">Don't have an account? <a href="/register">Register</a></p>
-	                  </div>
-	                  <br>
+            <div style="margin: 10px">
+              <div class="alert alert-danger" id="alert-email" style="display: none;">
+                <div class="container">
+                  <div class="alert-icon">
+                    <i class="material-icons">info_outline</i>
+                  </div>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                  </button>
+                  User is required!
                 </div>
+              </div>
+              <div class="alert alert-danger" id="alert-password" style="display: none;">
+                <div class="container">
+                  <div class="alert-icon">
+                    <i class="material-icons">info_outline</i>
+                  </div>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                  </button>
+                  Password is required!
+                </div>
+              </div>
+            </div>
+            <form style="padding: 10px;" onsubmit="event.preventDefault(); loginFunc()">
+              <div class="input-group">
+                <div>
+                  <span class="input-group-text">
+                    <i class="material-icons">email</i>
+                  </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Email..." value="ruigukjohn@gmail.com" id="email" maxlength="25">
+              </div>
+              <br>
+              <div class="input-group">
+                <div>
+                  <span class="input-group-text">
+                    <i class="material-icons">lock_outline</i>
+                  </span>
+                </div>
+                <input type="password" class="form-control" placeholder="Password..." value="1234" id="password" maxlength="15">
+              </div>
+              <br>                     
+              <div class="input-group">
+                <div class="row col-md-8 ml-auto mr-auto">
+                  <button class="btn btn-block btn-info ml-auto mr-auto">LOGIN</button>
+                </div>                    
+              </div>
+            </form>
+            <div style="align-items: center;">
+            	<p style="text-align: center;"><a href="/forgot">Forgot password ?</a></p>
+              <p style="text-align: center;">Don't have an account? <a href="/register">Register</a></p>
+            </div>
+	          <br>
+          </div>
     	</div>
     </div>
 </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
+
+<script type="text/javascript">
+  function login() {
+    axios.post('http://localhost:8000/auth/login',data)
+    .then(res=>{
+      console.log(res);
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+  function loginFunc() {
+    alert("HECK YEAH")
+
+    const email =document.getElementById("email").value;
+    const password =document.getElementById("password").value;
+
+    const data = {
+      "password":1234,
+      "email":"ruigukjohn@gmail.com"
+    }
+    axios.post('http://localhost:8000/auth/login',data)
+    .then(res=>{
+      console.log(res);
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+
+    function validate(email,password) {
+      var err= {
+        isEmailError:false,
+        isPasswordError:false
+      }
+
+      if (!email || email === "" || email === undefined) {
+        document.getElementById("alert-email").style.display="block";
+        err.isEmailError = true;
+      }else{
+        document.getElementById("alert-email").style.display="none";
+        err.isEmailError = false;
+      }
+
+      if (!password || password === "" || password === undefined) {
+        document.getElementById("alert-password").style.display="block";
+        err.isPasswordError = true;
+      }else{
+        document.getElementById("alert-password").style.display="none";
+        err.isPasswordError = false;
+      }
+      return err
+    }
+
+
+      // axios.post('http://localhost:8000/auth/login', {
+      //   email: 'Fred',
+      //   password: 'Flintstone'
+      // })
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+
+    const err = validate(email,password);
+
+    const { isEmailError, isPasswordError } = err;
+
+    if (isEmailError === false && isPasswordError === false) {
+
+      var data={
+        email,
+        password
+      }
+
+      const mydata ={
+        "data":{
+          email,
+          password
+        }
+      }
+
+      // axios.post('http://localhost:8000/auth/login',{},
+      // {
+      //   headers:{
+      //     "access-control-request-method": "POST",
+      //     "Content-Type":"application/x-www-form-urlencoded"
+      //     }
+      // })
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+
+
+
+      //  axios.defaults.headers = {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': 'myspecialpassword',
+      //     "Access-Control-Allow-Origin": "*"
+      // }
+      // axios.post('http://localhost:8000/auth/login',data,{headers:{
+      //     'Content-Type': 'application/json',
+      //     'Authorization': 'myspecialpassword',
+      //     "access-control-allow-origin": "*",    
+      //     "access-control-request-method": "POST",
+      //     "Access-Control-Allow-Headers":""
+      // }})
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+    }      
+  }
+</script>
 <%- include('./partials/footer.ejs') %>	
